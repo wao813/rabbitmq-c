@@ -152,7 +152,13 @@ typedef _W64 int ssize_t;
 #include <stddef.h>
 #include <stdint.h>
 
+struct timeval;
+
 AMQP_BEGIN_DECLS
+
+
+#define AMQP_STATUS_SUCCESS       0
+#define AMQP_STATUS_TIMEOUT       9
 
 typedef int amqp_boolean_t;
 typedef uint32_t amqp_method_number_t;
@@ -455,6 +461,12 @@ AMQP_PUBLIC_FUNCTION
 int
 AMQP_CALL amqp_simple_wait_frame(amqp_connection_state_t state,
                                  amqp_frame_t *decoded_frame);
+
+AMQP_PUBLIC_FUNCTION
+int
+AMQP_CALL amqp_simple_wait_frame_noblock(amqp_connection_state_t state,
+                                         amqp_frame_t *decoded_frame,
+                                         struct timeval *tv);
 
 AMQP_PUBLIC_FUNCTION
 int

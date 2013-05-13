@@ -38,12 +38,14 @@
  */
 
 #include <errno.h>
+#include <sys/time.h>
 #include <sys/types.h>      /* On older BSD this must come before net includes */
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <sys/uio.h>
+#include <unistd.h>
 
 int
 amqp_socket_init(void);
