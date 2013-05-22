@@ -508,7 +508,12 @@ static amqp_rpc_reply_t amqp_login_inner(amqp_connection_state_t state,
   uint16_t server_heartbeat;
   amqp_rpc_reply_t result;
 
-  amqp_send_header(state);
+  res = amqp_send_header(state);
+
+  if (res < 0) {
+    res = -amqp_socket_error(state->socket);
+    goto error_res;
+  }
 
   res = amqp_simple_wait_method(state, 0, AMQP_CONNECTION_START_METHOD,
                                 &method);
