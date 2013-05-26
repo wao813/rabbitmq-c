@@ -329,6 +329,22 @@ typedef struct amqp_connection_state_t_ *amqp_connection_state_t;
 
 typedef struct amqp_socket_t_ amqp_socket_t;
 
+typedef enum amqp_status_enum_
+{
+  AMQP_STATUS_OK =                         0,
+  AMQP_STATUS_NO_MEMORY =                 -1,
+  AMQP_STATUS_BAD_AMQP_DATA =             -2,
+  AMQP_STATUS_UNKNOWN_CLASS =             -3,
+  AMQP_STATUS_UNKNOWN_METHOD =            -4,
+  AMQP_STATUS_GETHOSTBYNAME_FAILED =      -5,
+  AMQP_STATUS_INCOMPATIBLE_AMQP_VERSION = -6,
+  AMQP_STATUS_CONNECTION_CLOSED =         -7,
+  AMQP_STATUS_BAD_URL =                   -8,
+  AMQP_STATUS_SOCKET_ERROR =              -9,
+  AMQP_STATUS_SSL_ERROR =                 -10,
+  AMQP_STATUS_ERROR =                     -99
+} amqp_status_enum;
+
 AMQP_PUBLIC_FUNCTION
 char const *
 AMQP_CALL amqp_version(void);
