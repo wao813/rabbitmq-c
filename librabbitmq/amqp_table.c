@@ -319,13 +319,13 @@ int amqp_encode_table(amqp_bytes_t encoded,
   *offset += 4; /* size of the table gets filled in later on */
 
   for (i = 0; i < input->num_entries; i++) {
-    res = amqp_encode_8(encoded, offset, input->entries[i].key.len);
-    if (res < 0) {
+    if (!amqp_encode_8(encoded, offset, input->entries[i].key.len)) {
+      res = AMQP_STATUS_BAD_AMQP_DATA;
       goto out;
     }
 
-    res = amqp_encode_bytes(encoded, offset, input->entries[i].key);
-    if (res < 0) {
+    if (!amqp_encode_bytes(encoded, offset, input->entries[i].key)) {
+      res = AMQP_STATUS_BAD_AMQP_DATA;
       goto out;
     }
 
